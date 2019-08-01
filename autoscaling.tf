@@ -47,7 +47,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-*-amd64-server-*"]
   }
 
   filter {
@@ -69,11 +69,16 @@ resource "aws_launch_configuration" "takeon-dev-launchconfig" {
 }
 
 # autoscaling policy
-
-resource "aws_autoscaling_policy" "takeon-dev-autoscaling-policy" {
-  name                   = "takeon-dev-autoscaling-policy"
-  scaling_adjustment     = 4
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300
-  autoscaling_group_name = "${aws_autoscaling_group.takeon-dev-autoscaling.name}"
+resource "aws_autoscaling_policy" "takeon-dev-autoscaling-policy"{
+  name = "TakeOn-Autoscaling"
+  autoscaling_group_name = "takeon-dev-autoscaling"
+  # scaling_adjustment = 1
+  policy_type = "TargetTrackingScaling"
+  adjustment_type = "ChangeInCapacity"
+  target_tracking_configuration {
+  predefined_metric_specification {
+    predefined_metric_type = "ASGAverageCPUUtilization"
+  }
+    target_value = 40.0
+  }
 }

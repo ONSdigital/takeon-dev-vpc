@@ -36,6 +36,7 @@ resource "aws_subnet" "takeon-dev-private-subnet" {
         App = "takeon-dev-private-subnet"
         "kubernetes.io/cluster/takeon-dev-eks" = "shared"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
+        "kubernetes.io/role/elb" = "1"
     }
 }
 
@@ -49,5 +50,6 @@ resource "aws_subnet" "takeon-dev-private-subnet2" {
         App = "takeon-dev-private-subnet2"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/cluster/takeon-dev-eks" = "shared"
+        "kubernetes.io/role/elb" = "1"
     }
 }
