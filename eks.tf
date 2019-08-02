@@ -86,24 +86,25 @@ resource "aws_iam_role_policy_attachment" "takeon-dev-node-role-AmazonEC2Contain
 
 # Node Config
 
-resource "aws_cloudformation_stack" "takeon-dev-stack" {
-  name = "networking-stack"
+# resource "aws_cloudformation_stack" "takeon-dev-stack" {
+#   name = "networking-stack"
 
-  parameters = {
-    VpcId = "${aws_vpc.takeon-dev-vpc.id}"
-    ClusterControlPlaneSecurityGroup = "${aws_security_group.takeon-dev-private-securitygroup.id}"
-    ClusterName = "${aws_eks_cluster.takeon-dev-eks.name}"
-    KeyName = "dev-vpc-key"
-    NodeAutoScalingGroupDesiredCapacity =	3
-    NodeAutoScalingGroupMaxSize	= 4	
-    NodeAutoScalingGroupMinSize	= 1
-    NodeGroupName	= "TakeOnGroup"
-    NodeImageId	= "ami-0147919d2ff9a6ad5"
-    NodeInstanceType	= "t3.medium"
-    NodeVolumeSize	= "20"
-    Subnets	= "${aws_subnet.takeon-dev-private-subnet.id},${aws_subnet.takeon-dev-private-subnet2.id}"
+#   parameters = {
+#     VpcId = "${aws_vpc.takeon-dev-vpc.id}"
+#     ClusterControlPlaneSecurityGroup = "${aws_security_group.takeon-dev-private-securitygroup.id}"
+#     ClusterName = "${aws_eks_cluster.takeon-dev-eks.name}"
+#     KeyName = "dev-vpc-key"
+#     NodeAutoScalingGroupDesiredCapacity =	3
+#     NodeAutoScalingGroupMaxSize	= 4	
+#     NodeAutoScalingGroupMinSize	= 1
+#     NodeGroupName	= "TakeOnGroup"
+#     NodeImageId	= "ami-0147919d2ff9a6ad5"
+#     NodeInstanceType	= "t3.medium"
+#     NodeVolumeSize	= "20"
+#     Subnets	= "${aws_subnet.takeon-dev-private-subnet.id},${aws_subnet.takeon-dev-private-subnet2.id}"
+#     iam_role_arn = "${aws_iam_role.takeon-dev-node-role.arn}"
 
-  }
+#   }
 
-  template_url = "https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml"
-}
+#   template_url = "https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml"
+# }

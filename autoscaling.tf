@@ -10,30 +10,18 @@ resource "aws_autoscaling_group" "takeon-dev-autoscaling" {
 
     tag {
         key   = "Name"
-        value = "takeon-dev-eks-takeon-dev-node"
+        value = "takeon-dev-node"
         propagate_at_launch = true
     }
 
     tag {
-        key   = "aws:cloudformation:logical-id"
-        value = "NodeGroup"
+        key   = "aws:autoscaling:groupName"
+        value = "takeon-dev-autoscaling"
         propagate_at_launch = true
     }
 
     tag {
-        key   = "aws:cloudformation:stack-id"
-        value = "arn:aws:cloudformation:eu-west-2:014669633018:stack/TakeOnStack/49e63100-9e47-11e9-bf5d-063e55d03e72"
-        propagate_at_launch = true
-    }
-
-    tag {
-        key   = "aws:cloudformation:stack-name"
-        value = "TakeOnStack"
-        propagate_at_launch = true
-    }
-
-    tag {
-        key   = "kubernetes.io/cluster/takeon-dev-eks"
+        key   = "kubernetes.io/cluster/takeon-dev-eks-cluster"
         value = "owned"
         propagate_at_launch = true
     }
