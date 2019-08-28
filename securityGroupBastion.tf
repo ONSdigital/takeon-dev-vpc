@@ -61,6 +61,6 @@ resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
 
     tags = {
         Name = "takeon-dev-bastion-securitygroup"
-        App = "takeon-dev-bastion-securitygroup"
+        App = "takeon"
     }
 }

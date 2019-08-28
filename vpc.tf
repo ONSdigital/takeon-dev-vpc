@@ -9,7 +9,7 @@ resource "aws_vpc" "takeon-dev-vpc" {
 
     tags = {
         Name = "takeon-dev-vpc"
-        App = "takeon-dev-vpc"
+        App = "takeon"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/cluster/takeon-dev-eks" = "shared"
     }
@@ -23,7 +23,7 @@ resource "aws_nat_gateway" "takeon-dev-nat" {
 
     tags = {
         Name = "takeon-dev-nat"
-        App = "takeon-dev-nat"
+        App = "takeon"
     }
 }
   
@@ -32,7 +32,7 @@ resource "aws_eip" "takeon-dev-eip" {
 
     tags = {
         Name = "takeon-dev-eip"
-        App = "takeon-dev-eip"
+        App = "takeon"
     }
 }
 
@@ -42,7 +42,7 @@ resource "aws_internet_gateway" "takeon-dev-ig" {
 
     tags = {
         Name = "takeon-dev-ig"
-        App = "takeon-dev-ig"
+        App = "takeon"
     }
 }
 
@@ -57,7 +57,7 @@ resource "aws_route_table" "takeon-dev-main-routetable" {
 
     tags = {
         Name = "takeon-dev-main-routetable"
-        App = "takeon-dev-main-routetable"
+        App = "takeon"
     }
 }
 
@@ -79,7 +79,7 @@ resource "aws_route_table" "takeon-dev-secondary-routetable" {
 
     tags = {
         Name = "takeon-dev-secondary-routetable"
-        App = "takeon-dev-secondary-routetable"
+        App = "takeon"
     }
 }
 
@@ -96,7 +96,7 @@ resource "aws_vpc_endpoint" "takeon-s3-endpoint" {
   
   tags = {
         Name = "takeon-dev-s3-endpoint"
-        App = "takeon-dev-s3-endpoint"
+        App = "takeon"
     }
 }
 
@@ -107,6 +107,6 @@ resource "aws_db_subnet_group" "takeon-dev-rds-subnetgroup" {
 
   tags = {
         Name = "takeon-dev-rds-subnetgroup"
-        App = "takeon-dev-rds-subnetgroup"
+        App = "takeon"
     }
 }

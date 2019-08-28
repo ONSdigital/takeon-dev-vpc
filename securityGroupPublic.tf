@@ -49,7 +49,7 @@ resource "aws_security_group" "takeon-dev-public-securitygroup" {
 
     tags ={
         Name = "takeon-dev-public-securitygroup"
-        App = "takeon-dev-public-securitygroup"
+        App = "takeon"
         }
     }
 

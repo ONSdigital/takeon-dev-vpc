@@ -20,6 +20,4 @@ echo "Generating validation data..."
 python generateValidationData.py >> $log
 echo "Adding example data"
 psql --host=localhost --port=1235 --username=$1 --dbname=takeondevdb -a -f exampledata.sql >> $log
-echo "Adding changelog rule"
-python addChangelogRule.py >> $log
 echo "Script finished"

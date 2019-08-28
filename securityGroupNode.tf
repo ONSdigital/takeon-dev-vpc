@@ -57,6 +57,7 @@ resource "aws_security_group" "takeon-dev-node-securitygroup" {
 
     tags = {
         Name = "takeon-nodes"
+        App = "takeon"
         "aws:cloudformation:stack-id" = "arn:aws:cloudformation:eu-west-2:014669633018:stack/TakeOnStack/49e63100-9e47-11e9-bf5d-063e55d03e72"
         "aws:cloudformation:stack-name" = "TakeOnStack"
         "aws:cloudformation:logical-id" = "NodeSecurityGroup"

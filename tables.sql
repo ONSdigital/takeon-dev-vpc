@@ -715,3 +715,15 @@ Values
     (8,'Default','Default','decThreshold','16',current_user,now()),
     (8,'Default','Default','incValue','26',current_user,now()),
     (8,'Default','Default','decValue','31',current_user,now());
+
+--graphQL custom queries
+
+create function dev01.search_response(search text)
+    returns setof dev01.response as $$
+        select *
+        from dev01.response
+        where
+        reference ilike ('%' || search || '%') or
+        period ilike ('%' || search || '%') or
+        survey ilike ('%' || search || '%')
+    $$ language sql stable;

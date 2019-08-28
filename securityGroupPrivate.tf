@@ -36,7 +36,7 @@ resource "aws_security_group" "takeon-dev-private-securitygroup" {
 
     tags = {
         Name = "takeon-dev-private-securitygroup"
-        App = "takeon-dev-private-securitygroup"
+        App = "takeon"
         }
 }
 

@@ -15,7 +15,7 @@ resource "aws_db_instance" "takeon" {
 
       tags = {
         Name = "takeon-dev-RDS"
-        App = "takeon-dev-RDS"
+        App = "takeon"
     }
 
   provisioner "local-exec" {

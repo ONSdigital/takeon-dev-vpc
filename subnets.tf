@@ -5,6 +5,7 @@ resource "aws_subnet" "takeon-dev-public-subnet" {
     availability_zone = ""
 
     tags = {
+        App = "takeon"
         Name = "takeon-dev-public-subnet"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/role/elb" = "1"
@@ -19,7 +20,7 @@ resource "aws_subnet" "takeon-dev-public-subnet2" {
 
     tags = {
         Name = "takeon-dev-public-subnet2"
-        App = "takeon-dev-public-subnet2"
+        App = "takeon"
         "kubernetes.io/role/elb" = "1"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/cluster/takeon-dev-eks" = "owned"
@@ -33,7 +34,7 @@ resource "aws_subnet" "takeon-dev-private-subnet" {
 
     tags = {
         Name = "takeon-dev-private-subnet"
-        App = "takeon-dev-private-subnet"
+        App = "takeon"
         "kubernetes.io/cluster/takeon-dev-eks" = "shared"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/role/elb" = "1"
@@ -47,7 +48,7 @@ resource "aws_subnet" "takeon-dev-private-subnet2" {
 
     tags = {
         Name = "takeon-dev-private-subnet2"
-        App = "takeon-dev-private-subnet2"
+        App = "takeon"
         "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/cluster/takeon-dev-eks" = "shared"
         "kubernetes.io/role/elb" = "1"
