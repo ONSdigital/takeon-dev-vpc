@@ -7,12 +7,11 @@ resource "aws_subnet" "takeon-dev-public-subnet" {
     tags = {
         App = "takeon"
         Name = "takeon-dev-public-subnet"
-        "kubernetes.io/cluster/Take-On-Temp" = "shared"
         "kubernetes.io/role/elb" = "1"
-        "kubernetes.io/cluster/takeon-dev-eks" = "owned"
+        "kubernetes.io/cluster/takeon-dev-eks-cluster" = "shared"
     }
 }
-    
+
 resource "aws_subnet" "takeon-dev-public-subnet2" {
     vpc_id = "${aws_vpc.takeon-dev-vpc.id}"
     cidr_block = "${var.cidr_public2}"
@@ -22,8 +21,7 @@ resource "aws_subnet" "takeon-dev-public-subnet2" {
         Name = "takeon-dev-public-subnet2"
         App = "takeon"
         "kubernetes.io/role/elb" = "1"
-        "kubernetes.io/cluster/Take-On-Temp" = "shared"
-        "kubernetes.io/cluster/takeon-dev-eks" = "owned"
+        "kubernetes.io/cluster/takeon-dev-eks-cluster" = "shared"
     }
 }
 
@@ -35,9 +33,8 @@ resource "aws_subnet" "takeon-dev-private-subnet" {
     tags = {
         Name = "takeon-dev-private-subnet"
         App = "takeon"
-        "kubernetes.io/cluster/takeon-dev-eks" = "shared"
-        "kubernetes.io/cluster/Take-On-Temp" = "shared"
-        "kubernetes.io/role/elb" = "1"
+        "kubernetes.io/cluster/takeon-dev-eks-cluster" = "shared"
+        "kubernetes.io/role/internal-elb" = "1"
     }
 }
 
@@ -49,8 +46,7 @@ resource "aws_subnet" "takeon-dev-private-subnet2" {
     tags = {
         Name = "takeon-dev-private-subnet2"
         App = "takeon"
-        "kubernetes.io/cluster/Take-On-Temp" = "shared"
-        "kubernetes.io/cluster/takeon-dev-eks" = "shared"
-        "kubernetes.io/role/elb" = "1"
+        "kubernetes.io/cluster/takeon-dev-eks-cluster" = "shared"
+        "kubernetes.io/role/internal-elb" = "1"
     }
 }

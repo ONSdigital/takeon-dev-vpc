@@ -10,8 +10,7 @@ resource "aws_vpc" "takeon-dev-vpc" {
     tags = {
         Name = "takeon-dev-vpc"
         App = "takeon"
-        "kubernetes.io/cluster/Take-On-Temp" = "shared"
-        "kubernetes.io/cluster/takeon-dev-eks" = "shared"
+        "kubernetes.io/cluster/takeon-dev-eks-cluster" = "shared"
     }
 }
 
@@ -26,7 +25,7 @@ resource "aws_nat_gateway" "takeon-dev-nat" {
         App = "takeon"
     }
 }
-  
+
 resource "aws_eip" "takeon-dev-eip" {
     vpc = true
 
@@ -49,7 +48,7 @@ resource "aws_internet_gateway" "takeon-dev-ig" {
 # Defining main route table, associated with private subnet and nat gateway
 resource "aws_route_table" "takeon-dev-main-routetable" {
     vpc_id = "${aws_vpc.takeon-dev-vpc.id}"
-    
+
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = "${aws_nat_gateway.takeon-dev-nat.id}"
@@ -71,7 +70,7 @@ resource "aws_route_table_association" "takeon-dev-main-routetable" {
 
 resource "aws_route_table" "takeon-dev-secondary-routetable" {
     vpc_id = "${aws_vpc.takeon-dev-vpc.id}"
-    
+
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = "${aws_internet_gateway.takeon-dev-ig.id}"
@@ -93,7 +92,7 @@ resource "aws_route_table_association" "takeon-dev-secondary-routetable" {
 resource "aws_vpc_endpoint" "takeon-s3-endpoint" {
   vpc_id       = "${aws_vpc.takeon-dev-vpc.id}"
   service_name = "com.amazonaws.eu-west-2.s3"
-  
+
   tags = {
         Name = "takeon-dev-s3-endpoint"
         App = "takeon"
