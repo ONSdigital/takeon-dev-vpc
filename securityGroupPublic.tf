@@ -12,6 +12,13 @@ resource "aws_security_group" "takeon-dev-public-securitygroup" {
     }
 
     ingress {
+      from_port = 80
+      to_port = 80
+      protocol = "TCP"
+      cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
+    ingress {
       from_port = 22
       to_port = 22
       protocol = "TCP"
@@ -32,6 +39,20 @@ resource "aws_security_group" "takeon-dev-public-securitygroup" {
       cidr_blocks = ["${var.my_ip}"]
     }
 
+    ingress {
+      from_port = 3389
+      to_port = 3389
+      protocol = "TCP"
+      cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
+    ingress {
+      from_port = 443
+      to_port = 443
+      protocol = "TCP"
+      cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
     # Egress rules
     egress {
       from_port = 80
@@ -45,6 +66,20 @@ resource "aws_security_group" "takeon-dev-public-securitygroup" {
       to_port = 443
       protocol = "TCP"
       cidr_blocks = ["${var.my_ip}"]
+    }
+
+    egress {
+      from_port = 80
+      to_port = 80
+      protocol = "TCP"
+      cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
+    egress {
+      from_port = 443
+      to_port = 443
+      protocol = "TCP"
+      cidr_blocks = ["${var.gov_wifi_ip}"]
     }
 
     tags ={
