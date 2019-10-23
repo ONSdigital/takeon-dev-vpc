@@ -1,3 +1,4 @@
+#IAM role and policy to allow the EKS service to manage or retrieve data from other AWS services
 resource "aws_iam_role" "takeon-eks-role" {
   name = "takeon-eks-role"
 
@@ -39,9 +40,9 @@ resource "aws_eks_cluster" "takeon-dev-eks" {
     role_arn = "${aws_iam_role.takeon-eks-role.arn}"
 
     vpc_config {
-        subnet_ids = ["${aws_subnet.takeon-dev-public-subnet.id}", "${aws_subnet.takeon-dev-public-subnet2.id}", 
+        subnet_ids = ["${aws_subnet.takeon-dev-public-subnet.id}", "${aws_subnet.takeon-dev-public-subnet2.id}",
                       "${aws_subnet.takeon-dev-private-subnet.id}", "${aws_subnet.takeon-dev-private-subnet2.id}"]
-    
+
     security_group_ids = ["${aws_security_group.takeon-dev-private-securitygroup.id}"]
     }
 
@@ -86,8 +87,8 @@ resource "aws_iam_role_policy_attachment" "takeon-dev-node-role-AmazonEC2Contain
 
 # Node Config
 
-resource "aws_cloudformation_stack" "takeon-dev-stack" {
-  name = "takeon-dev-stack"
+resource "aws_cloudformation_stack" "takeon-dev-node-stack" {
+  name = "takeon-dev-node-stack"
   capabilities = ["CAPABILITY_IAM"]
 
   parameters = {
@@ -102,7 +103,7 @@ resource "aws_cloudformation_stack" "takeon-dev-stack" {
     NodeImageId	= "ami-0147919d2ff9a6ad5"
     NodeInstanceType	= "t3.medium"
     Subnets	= "${aws_subnet.takeon-dev-private-subnet.id},${aws_subnet.takeon-dev-private-subnet2.id}"
-    
+
 
   }
 

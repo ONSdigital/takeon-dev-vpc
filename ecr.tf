@@ -29,3 +29,11 @@ resource "aws_ecr_repository" "takeon-dev-vpl-repo" {
       App = "takeon"
   }
 }
+
+resource "aws_ecr_repository" "takeon-dev-graphql-repo" {
+  name = "takeon-dev-graphql"
+  tags = {
+      Name = "takeon-dev-graphql-repo"
+      App = "takeon"
+  }
+}
