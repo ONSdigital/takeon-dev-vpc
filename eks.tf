@@ -33,11 +33,18 @@ resource "aws_iam_role_policy_attachment" "take-on-cluster-AmazonEKSWorkerNodePo
   role       = "${aws_iam_role.takeon-eks-role.name}"
 }
 
+variable "eks_cluster_enabled_logs" {
+  type        = list(string)
+  description = "A list of enabled cluster logs. Allowed types are api, audit , authenticator , controllerManager,scheduler"
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+}
+
 # EKS cluster
 
 resource "aws_eks_cluster" "takeon-dev-eks" {
     name = "takeon-dev-eks-cluster"
     role_arn = "${aws_iam_role.takeon-eks-role.arn}"
+    enabled_cluster_log_types = "${var.eks_cluster_enabled_logs}"
 
     vpc_config {
         subnet_ids = ["${aws_subnet.takeon-dev-public-subnet.id}", "${aws_subnet.takeon-dev-public-subnet2.id}",
@@ -48,6 +55,7 @@ resource "aws_eks_cluster" "takeon-dev-eks" {
 
 
 }
+
 
 # Worker node configuration
 

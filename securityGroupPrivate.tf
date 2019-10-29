@@ -12,12 +12,27 @@ resource "aws_security_group" "takeon-dev-private-securitygroup" {
         cidr_blocks = ["${var.cidr_private}"]
     }
 
+    # To access database from the Bastion
+        ingress {
+        from_port = 5432
+        to_port = 5432
+        protocol = "TCP"
+        cidr_blocks = ["${aws_security_group.takeon-dev-bastion-securitygroup.id}"]
+    }
+
     # Egress rules
     egress {
         from_port = 80
         to_port = 80
         protocol = "TCP"
         cidr_blocks = ["${var.my_ip}"]
+    }
+
+    egress {
+        from_port = 80
+        to_port = 80
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
     }
 
     egress {
@@ -32,6 +47,13 @@ resource "aws_security_group" "takeon-dev-private-securitygroup" {
         from_port = 443
         protocol = "TCP"
         cidr_blocks = ["${var.my_ip}"]
+    }
+
+    egress {
+        to_port = 443
+        from_port = 443
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
     }
 
     tags = {
