@@ -1,7 +1,7 @@
 
 # Dead letter queue
-resource "aws_sqs_queue" "TakeOn-DLQ-Validation" {
-  name = "TakeOn-DLQ-Validation"
+resource "aws_sqs_queue" "DLQ" {
+  name = "${var.environment_name}-DLQ-Validation"
 
     tags = {
         App = "takeon"
@@ -11,8 +11,8 @@ resource "aws_sqs_queue" "TakeOn-DLQ-Validation" {
 # TakeOn-DataPrep-Input
 
 resource "aws_sqs_queue" "TakeOn-DataPrep-Input" {
-  name = "TakeOn-DataPrep-Input"
-  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.TakeOn-DLQ-Validation.arn}\",\"maxReceiveCount\":3}"
+  name = "${var.environment_name}-DataPrep-Input"
+  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
         App = "takeon"
@@ -22,8 +22,8 @@ resource "aws_sqs_queue" "TakeOn-DataPrep-Input" {
 # TakeOn-Validation-HandledErrors
 
 resource "aws_sqs_queue" "TakeOn-Validation-HandledErrors" {
-  name = "TakeOn-Validation-HandledErrors"
-  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.TakeOn-DLQ-Validation.arn}\",\"maxReceiveCount\":3}"
+  name = "${var.environment_name}-Validation-HandledErrors"
+  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
         App = "takeon"
@@ -33,8 +33,8 @@ resource "aws_sqs_queue" "TakeOn-Validation-HandledErrors" {
 # TakeOn-Validation-Runner
 
 resource "aws_sqs_queue" "TakeOn-Validation-Runner" {
-  name = "TakeOn-Validation-Runner"
-  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.TakeOn-DLQ-Validation.arn}\",\"maxReceiveCount\":3}"
+  name = "${var.environment_name}-Validation-Runner"
+  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
         App = "takeon"
@@ -45,8 +45,8 @@ resource "aws_sqs_queue" "TakeOn-Validation-Runner" {
 # TakeOn-Validation-SaveToDB
 
 resource "aws_sqs_queue" "TakeOn-Validation-SaveToDB" {
-  name = "TakeOn-Validation-SaveToDB"
-  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.TakeOn-DLQ-Validation.arn}\",\"maxReceiveCount\":3}"
+  name = "${var.environment_name}-Validation-SaveToDB"
+  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
         App = "takeon"
@@ -57,8 +57,8 @@ resource "aws_sqs_queue" "TakeOn-Validation-SaveToDB" {
 # TakeOn-Validation-Wrangler
 
 resource "aws_sqs_queue" "TakeOn-Validation-Wrangler" {
-  name = "TakeOn-Validation-Wrangler"
-  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.TakeOn-DLQ-Validation.arn}\",\"maxReceiveCount\":3}"
+  name = "${var.environment_name}-Validation-Wrangler"
+  redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
         App = "takeon"

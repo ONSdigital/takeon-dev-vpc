@@ -11,10 +11,10 @@ resource "aws_db_instance" "takeon" {
     identifier = "takeondevdb"
     skip_final_snapshot = true
     db_subnet_group_name = "${var.rds_subnet_group}"
-    vpc_security_group_ids = ["${aws_security_group.takeon-dev-private-securitygroup.id}"]
+    vpc_security_group_ids = ["${aws_security_group.private-securitygroup.id}"]
 
       tags = {
-        Name = "takeon-dev-RDS"
+        Name = "${var.environment_name}-RDS"
         App = "takeon"
     }
 

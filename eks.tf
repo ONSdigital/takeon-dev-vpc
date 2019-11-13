@@ -41,16 +41,16 @@ variable "eks_cluster_enabled_logs" {
 
 # EKS cluster
 
-resource "aws_eks_cluster" "takeon-dev-eks" {
-    name = "takeon-dev-eks-cluster"
+resource "aws_eks_cluster" "eks" {
+    name = "${var.environment_name}-eks-cluster"
     role_arn = "${aws_iam_role.takeon-eks-role.arn}"
     enabled_cluster_log_types = "${var.eks_cluster_enabled_logs}"
 
     vpc_config {
-        subnet_ids = ["${aws_subnet.takeon-dev-public-subnet.id}", "${aws_subnet.takeon-dev-public-subnet2.id}",
-                      "${aws_subnet.takeon-dev-private-subnet.id}", "${aws_subnet.takeon-dev-private-subnet2.id}"]
+        subnet_ids = ["${aws_subnet.public-subnet.id}", "${aws_subnet.public-subnet2.id}",
+                      "${aws_subnet.private-subnet.id}", "${aws_subnet.private-subnet2.id}"]
 
-    security_group_ids = ["${aws_security_group.takeon-dev-private-securitygroup.id}"]
+    security_group_ids = ["${aws_security_group.private-securitygroup.id}"]
     }
 
 
@@ -59,8 +59,8 @@ resource "aws_eks_cluster" "takeon-dev-eks" {
 
 # Worker node configuration
 
-resource "aws_iam_role" "takeon-dev-node-role" {
-  name = "takeon-dev-node-role"
+resource "aws_iam_role" "node-role" {
+  name = "${var.environment_name}-node-role"
 
   assume_role_policy = <<POLICY
 {
@@ -78,31 +78,31 @@ resource "aws_iam_role" "takeon-dev-node-role" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "takeon-dev-node-role-AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "node-role-AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = "${aws_iam_role.takeon-dev-node-role.name}"
+  role       = "${aws_iam_role.node-role.name}"
 }
 
-resource "aws_iam_role_policy_attachment" "takeon-dev-node-role-AmazonEKS_CNI_Policy" {
+resource "aws_iam_role_policy_attachment" "node-role-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = "${aws_iam_role.takeon-dev-node-role.name}"
+  role       = "${aws_iam_role.node-role.name}"
 }
 
-resource "aws_iam_role_policy_attachment" "takeon-dev-node-role-AmazonEC2ContainerRegistryReadOnly" {
+resource "aws_iam_role_policy_attachment" "node-role-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = "${aws_iam_role.takeon-dev-node-role.name}"
+  role       = "${aws_iam_role.node-role.name}"
 }
 
 # Node Config
 
-resource "aws_cloudformation_stack" "takeon-dev-node-stack" {
-  name = "takeon-dev-node-stack"
+resource "aws_cloudformation_stack" "node-stack" {
+  name = "${var.environment_name}-node-stack"
   capabilities = ["CAPABILITY_IAM"]
 
   parameters = {
-    VpcId = "${aws_vpc.takeon-dev-vpc.id}"
-    ClusterControlPlaneSecurityGroup = "${aws_security_group.takeon-dev-private-securitygroup.id}"
-    ClusterName = "${aws_eks_cluster.takeon-dev-eks.name}"
+    VpcId = "${aws_vpc.vpc.id}"
+    ClusterControlPlaneSecurityGroup = "${aws_security_group.private-securitygroup.id}"
+    ClusterName = "${aws_eks_cluster.eks.name}"
     KeyName = "dev-vpc-key"
     NodeAutoScalingGroupDesiredCapacity =	2
     NodeAutoScalingGroupMaxSize	= 5
@@ -110,7 +110,7 @@ resource "aws_cloudformation_stack" "takeon-dev-node-stack" {
     NodeGroupName	= "TakeOnGroup"
     NodeImageId	= "ami-0147919d2ff9a6ad5"
     NodeInstanceType	= "t3.medium"
-    Subnets	= "${aws_subnet.takeon-dev-private-subnet.id},${aws_subnet.takeon-dev-private-subnet2.id}"
+    Subnets	= "${aws_subnet.private-subnet.id},${aws_subnet.private-subnet2.id}"
 
 
   }
