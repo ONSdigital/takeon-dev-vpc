@@ -95,3 +95,12 @@ resource "aws_security_group_rule" "takeon-dev-private-securitygroup-bastion2" {
         source_security_group_id = "${aws_security_group.takeon-dev-bastion-securitygroup.id}"
         security_group_id = "${aws_security_group.takeon-dev-private-securitygroup.id}"
     }
+
+resource "aws_security_group_rule" "takeon-dev-private-securitygroup-Egress-Endpoint" {
+        type = "egress"
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        source_security_group_id = "${aws_security_group.takeon-dev-endpoint-securitygroup.id}"
+        security_group_id = "${aws_security_group.takeon-dev-private-securitygroup.id}"
+    }
