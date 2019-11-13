@@ -2,6 +2,9 @@
 variable "my_ip" {
 }
 
+variable "gov_wifi_ip" {
+}
+
 # RDS
 variable "rds_subnet_group" {
 }
