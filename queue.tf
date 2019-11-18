@@ -1,7 +1,7 @@
 
 # Dead letter queue
 resource "aws_sqs_queue" "DLQ" {
-  name = "${var.environment_name}-DLQ-Validation"
+  name = "${var.environment_name}-Validation-DeadLetterQueue"
 
     tags = {
         App = "takeon"

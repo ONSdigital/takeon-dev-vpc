@@ -26,7 +26,7 @@ resource "aws_instance" "bastion" {
   key_name = "ConcDeploy"
 
   tags = {
-    Name = "Takeon-VPC-Dev-Bastion"
+    Name = "${var.environment_name}-Bastion"
     App = "takeon"
   }
 }

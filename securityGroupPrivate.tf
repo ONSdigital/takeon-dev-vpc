@@ -17,7 +17,7 @@ resource "aws_security_group" "private-securitygroup" {
         from_port = 5432
         to_port = 5432
         protocol = "TCP"
-        cidr_blocks = ["${aws_security_group.bastion-securitygroup.id}"]
+        security_groups = ["${aws_security_group.bastion-securitygroup.id}"]
     }
 
     # Egress rules
@@ -100,14 +100,14 @@ resource "aws_security_group_rule" "private-securitygroup-Egress-Self" {
         security_group_id = "${aws_security_group.private-securitygroup.id}"
     }
 
-resource "aws_security_group_rule" "private-securitygroup-bastion1" {
-        type = "ingress"
-        from_port = 5432
-        to_port = 5432
-        protocol = "tcp"
-        source_security_group_id = "${aws_security_group.bastion-securitygroup.id}"
-        security_group_id = "${aws_security_group.private-securitygroup.id}"
-    }
+# resource "aws_security_group_rule" "private-securitygroup-bastion1" {
+#         type = "ingress"
+#         from_port = 5432
+#         to_port = 5432
+#         protocol = "tcp"
+#         source_security_group_id = "${aws_security_group.bastion-securitygroup.id}"
+#         security_group_id = "${aws_security_group.private-securitygroup.id}"
+#     }
 
 resource "aws_security_group_rule" "private-securitygroup-bastion2" {
         type = "ingress"
