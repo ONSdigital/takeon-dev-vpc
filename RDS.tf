@@ -1,4 +1,4 @@
-resource "aws_db_instance" "takeon" {
+resource "aws_db_instance" "RDS" {
     allocated_storage = 5
     storage_type = "gp2"
     engine = "postgres"
