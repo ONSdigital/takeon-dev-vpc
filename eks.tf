@@ -1,6 +1,6 @@
 #IAM role and policy to allow the EKS service to manage or retrieve data from other AWS services
 resource "aws_iam_role" "takeon-eks-role" {
-  name = "takeon-eks-role"
+  name = "${var.environment_name}-eks-role"
 
   assume_role_policy = <<POLICY
 {
