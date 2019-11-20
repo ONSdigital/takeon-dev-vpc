@@ -117,3 +117,12 @@ resource "aws_security_group_rule" "private-securitygroup-bastion2" {
         source_security_group_id = "${aws_security_group.bastion-securitygroup.id}"
         security_group_id = "${aws_security_group.private-securitygroup.id}"
     }
+
+resource "aws_security_group_rule" "private-securitygroup-Egress-Endpoint" {
+        type = "egress"
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        source_security_group_id = "${aws_security_group.endpoint-securitygroup.id}"
+        security_group_id = "${aws_security_group.private-securitygroup.id}"
+    }

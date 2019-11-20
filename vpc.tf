@@ -6,6 +6,7 @@ provider "aws" {
 # Defining the VPC to be used
 resource "aws_vpc" "vpc" {
     cidr_block = "10.0.0.0/16"
+    enable_dns_hostnames = true
 
     tags = {
         Name = "${var.environment_name}-vpc"
@@ -97,6 +98,26 @@ resource "aws_vpc_endpoint" "takeon-s3-endpoint" {
         Name = "${var.environment_name}-s3-endpoint"
         App = "takeon"
     }
+}
+
+#######################
+# VPC Endpoint for SQS
+#######################
+
+# VPC endpoint allows entities in the subnets associated with the associated route tables to access S3.
+resource "aws_vpc_endpoint" "sqs" {
+  service_name        = "com.amazonaws.eu-west-2.sqs"
+  vpc_id              = "${aws_vpc.takeon-dev-vpc.id}"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+
+  subnet_ids         = ["${aws_subnet.takeon-dev-private-subnet.id}", "${aws_subnet.takeon-dev-private-subnet2.id}"]
+  security_group_ids = ["${aws_security_group.takeon-dev-endpoint-securitygroup.id}"]
+
+  tags = {
+      Name = "takeon-dev-sqs-endpoint"
+      App = "takeon"
+  }
 }
 
 # Defining subnet group for RDS
