@@ -1,7 +1,7 @@
 # Security group for the bastion instance to allow local update
-resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
-    name = "takeon-dev-bastion-securitygroup"
-    vpc_id = "${aws_vpc.takeon-dev-vpc.id}"
+resource "aws_security_group" "bastion-securitygroup" {
+    name = "${var.environment_name}-bastion-securitygroup"
+    vpc_id = "${aws_vpc.vpc.id}"
 
     ingress {
         from_port = 5432
@@ -15,6 +15,34 @@ resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
         to_port = 22
         protocol = "TCP"
         cidr_blocks = ["${var.my_ip}"]
+    }
+
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "TCP"
+        cidr_blocks = ["${var.my_ip}"]
+    }
+
+    ingress {
+        from_port = 5432
+        to_port = 5432
+        protocol = "TCP"
+        cidr_blocks =["${var.gov_wifi_ip}"]
+    }
+
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
     }
 
     egress {
@@ -59,8 +87,22 @@ resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
         cidr_blocks = ["${var.my_ip}"]
     }
 
+    egress {
+        from_port = 80
+        to_port = 80
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
+    egress {
+        from_port = 443
+        to_port = 443
+        protocol = "TCP"
+        cidr_blocks = ["${var.gov_wifi_ip}"]
+    }
+
     tags = {
-        Name = "takeon-dev-bastion-securitygroup"
+        Name = "${var.environment_name}-bastion-securitygroup"
         App = "takeon"
     }
 }

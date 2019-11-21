@@ -2,8 +2,16 @@
 variable "my_ip" {
 }
 
+variable "gov_wifi_ip" {
+}
+
+variable "environment_name" {
+}
+
 # RDS
-variable "rds_subnet_group" {
+
+# DB name can only contain lowercase letters
+variable "DB_name"{
 }
 
 variable "resource_group" {
