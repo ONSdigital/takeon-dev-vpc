@@ -8,6 +8,9 @@ variable "gov_wifi_ip" {
 variable "environment_name" {
 }
 
+variable "accountID" {
+}
+
 # RDS
 
 # DB name can only contain lowercase letters

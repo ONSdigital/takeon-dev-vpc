@@ -2,7 +2,9 @@ resource "aws_security_group" "node-securitygroup" {
     name        = "node-securitygroup"
     description = "Security group for all nodes in the cluster"
     vpc_id      = "${aws_vpc.vpc.id}"
-
+    timeouts {
+        delete = "40m"
+    }
     ingress {
         from_port       = 32099
         to_port         = 32099
@@ -58,7 +60,7 @@ resource "aws_security_group" "node-securitygroup" {
     tags = {
         Name = "takeon-nodes"
         App = "takeon"
-        "aws:cloudformation:stack-id" = "arn:aws:cloudformation:eu-west-2:014669633018:stack/node-stack/80d89740-f1ba-11e9-9980-02ea235e602c"
+        "aws:cloudformation:stack-id" = "arn:aws:cloudformation:eu-west-2:${var.accountID}:stack/node-stack/80d89740-f1ba-11e9-9980-02ea235e602c"
         "aws:cloudformation:stack-name" = "node-stack"
         "aws:cloudformation:logical-id" = "NodeSecurityGroup"
         "kubernetes.io/cluster/${aws_eks_cluster.eks.name}" = "owned"

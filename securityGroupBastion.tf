@@ -2,7 +2,9 @@
 resource "aws_security_group" "bastion-securitygroup" {
     name = "${var.environment_name}-bastion-securitygroup"
     vpc_id = "${aws_vpc.vpc.id}"
-
+    timeouts {
+        delete = "40m"
+    }
     ingress {
         from_port = 5432
         to_port = 5432
