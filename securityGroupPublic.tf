@@ -2,9 +2,7 @@
 resource "aws_security_group" "public-securitygroup" {
   name = "${var.environment_name}-public-securitygroup"
   vpc_id = "${aws_vpc.vpc.id}"
-    timeouts {
-        delete = "40m"
-    }
+    
     # Ingress rules
     ingress {
       from_port = 80

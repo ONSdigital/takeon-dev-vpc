@@ -3,9 +3,7 @@ resource "aws_subnet" "public-subnet" {
     vpc_id = "${aws_vpc.vpc.id}"
     cidr_block = "${var.cidr_public}"
     availability_zone = ""
-    timeouts {
-        delete = "40m"
-    }
+
     tags = {
         App = "takeon"
         Name = "${var.environment_name}-public-subnet"
@@ -18,9 +16,7 @@ resource "aws_subnet" "public-subnet2" {
     vpc_id = "${aws_vpc.vpc.id}"
     cidr_block = "${var.cidr_public2}"
     availability_zone = ""
-    timeouts {
-        delete = "40m"
-    }
+
     tags = {
         Name = "${var.environment_name}-public-subnet2"
         App = "takeon"

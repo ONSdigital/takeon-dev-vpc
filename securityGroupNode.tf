@@ -2,9 +2,7 @@ resource "aws_security_group" "node-securitygroup" {
     name        = "node-securitygroup"
     description = "Security group for all nodes in the cluster"
     vpc_id      = "${aws_vpc.vpc.id}"
-    timeouts {
-        delete = "40m"
-    }
+
     ingress {
         from_port       = 32099
         to_port         = 32099
