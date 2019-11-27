@@ -1,39 +1,39 @@
-resource "aws_ecr_repository" "takeon-dev-ui-repo" {
-  name = "takeon-dev-ui"
+resource "aws_ecr_repository" "ui-repo" {
+  name = "${var.environment_name}-ui"
   tags = {
-      Name = "takeon-dev-ui-repo"
+      Name = "${var.environment_name}-ui-repo"
       App = "takeon"
   }
 }
 
-resource "aws_ecr_repository" "takeon-dev-bl-repo" {
-  name = "takeon-dev-bl"
+resource "aws_ecr_repository" "bl-repo" {
+  name = "${var.environment_name}-bl"
   tags = {
-      Name = "takeon-dev-bl-repo"
+      Name = "${var.environment_name}-bl-repo"
       App = "takeon"
   }
 }
 
-resource "aws_ecr_repository" "takeon-dev-pl-repo" {
-  name = "takeon-dev-pl"
+resource "aws_ecr_repository" "pl-repo" {
+  name = "${var.environment_name}-pl"
   tags = {
-      Name = "takeon-dev-pl-repo"
+      Name = "${var.environment_name}-pl-repo"
       App = "takeon"
   }
 }
 
-resource "aws_ecr_repository" "takeon-dev-vpl-repo" {
-  name = "takeon-dev-vpl"
+resource "aws_ecr_repository" "vpl-repo" {
+  name = "${var.environment_name}-vpl"
   tags = {
-      Name = "takeon-dev-vpl-repo"
+      Name = "${var.environment_name}-vpl-repo"
       App = "takeon"
   }
 }
 
-resource "aws_ecr_repository" "takeon-dev-graphql-repo" {
-  name = "takeon-dev-graphql"
+resource "aws_ecr_repository" "graphql-repo" {
+  name = "${var.environment_name}-graphql"
   tags = {
-      Name = "takeon-dev-graphql-repo"
+      Name = "${var.environment_name}-graphql-repo"
       App = "takeon"
   }
 }

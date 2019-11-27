@@ -1,8 +1,8 @@
 # Security group for the bastion instance to allow local update
-resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
-    name = "takeon-dev-bastion-securitygroup"
-    vpc_id = "${aws_vpc.takeon-dev-vpc.id}"
-
+resource "aws_security_group" "bastion-securitygroup" {
+    name = "${var.environment_name}-bastion-securitygroup"
+    vpc_id = "${aws_vpc.vpc.id}"
+  
     ingress {
         from_port = 5432
         to_port = 5432
@@ -102,7 +102,7 @@ resource "aws_security_group" "takeon-dev-bastion-securitygroup" {
     }
 
     tags = {
-        Name = "takeon-dev-bastion-securitygroup"
+        Name = "${var.environment_name}-bastion-securitygroup"
         App = "takeon"
     }
 }
