@@ -24,11 +24,11 @@ resource "aws_s3_bucket_notification" "LZ" {
 }
 
 resource "aws_s3_bucket" "IZ" {
-  bucket = "${var.environment_name}-ingestion-zone-bucket"
+  bucket = "${var.environment_name}-ingest-zone-bucket"
   acl    = "private"
 
   tags = {
-    Name = "${var.environment_name}-IngestionZone-Bucket"
+    Name = "${var.environment_name}-IngestZone-Bucket"
     App  = "takeon"
   }
 }

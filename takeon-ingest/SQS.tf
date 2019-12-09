@@ -37,8 +37,8 @@ POLICY
 
 # TakeOn-Validation-HandledErrors
 
-resource "aws_sqs_queue" "IngestionZone" {
-  name = "${var.environment_name}-IngestionZone"
+resource "aws_sqs_queue" "IngestZone" {
+  name = "${var.environment_name}-IngestZone"
   redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.DLQ.arn}\",\"maxReceiveCount\":3}"
 
     tags = {
