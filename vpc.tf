@@ -67,6 +67,7 @@ resource "aws_route_table_association" "main-routetable" {
     route_table_id = "${aws_route_table.main-routetable.id}"
 }
 
+
 # Defining secondary route table, associated with public subnet and internet gateway
 
 resource "aws_route_table" "secondary-routetable" {
@@ -98,6 +99,11 @@ resource "aws_vpc_endpoint" "takeon-s3-endpoint" {
         Name = "${var.environment_name}-s3-endpoint"
         App = "takeon"
     }
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3-route-association" {
+  route_table_id  = "${aws_route_table.main-routetable.id}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.takeon-s3-endpoint.id}"
 }
 
 # Defining subnet group for RDS
