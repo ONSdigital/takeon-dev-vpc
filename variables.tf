@@ -5,6 +5,9 @@ variable "my_ip" {
 variable "gov_wifi_ip" {
 }
 
+variable "ons_ip" {
+}
+
 variable "environment_name" {
 }
 
