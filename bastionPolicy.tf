@@ -1,5 +1,9 @@
-data "aws_iam_group" "AllowTakeonBastionAccess" {
-    group_name = "AllowTakeonBastionAccess"
+# data "aws_iam_group" "AllowTakeonBastionAccess" {
+#     group_name = "AllowTakeonBastionAccess"
+# }
+
+resource "aws_iam_group" "AllowTakeonBastionAccess" {
+     name = "AllowTakeonBastionAccess"
 }
 
 resource "aws_iam_policy" "BastionAccess" {
@@ -32,6 +36,6 @@ EOF
 }
 
 resource "aws_iam_group_policy_attachment" "attach_bastion_policy" {
-  group = "${data.aws_iam_group.AllowTakeonBastionAccess.group_name}"
-  policy_arn = "${aws_iam_policy.BastionAccess.arn}"
+  group = aws_iam_group.AllowTakeonBastionAccess.name
+  policy_arn = aws_iam_policy.BastionAccess.arn
 }

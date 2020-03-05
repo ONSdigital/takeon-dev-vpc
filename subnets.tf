@@ -8,7 +8,7 @@ resource "aws_subnet" "public-subnet" {
         App = "takeon"
         Name = "${var.environment_name}-public-subnet"
         "kubernetes.io/role/elb" = "1"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
     }
 }
 
@@ -21,7 +21,7 @@ resource "aws_subnet" "public-subnet2" {
         Name = "${var.environment_name}-public-subnet2"
         App = "takeon"
         "kubernetes.io/role/elb" = "1"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
     }
 }
 
@@ -35,7 +35,7 @@ resource "aws_subnet" "private-subnet" {
     tags = {
         Name = "${var.environment_name}-private-subnet"
         App = "takeon"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
         "kubernetes.io/role/internal-elb" = "1"
     }
 }
@@ -50,7 +50,7 @@ resource "aws_subnet" "private-subnet2" {
     tags = {
         Name = "${var.environment_name}-private-subnet2"
         App = "takeon"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
         "kubernetes.io/role/internal-elb" = "1"
     }
 }
