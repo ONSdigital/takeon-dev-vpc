@@ -2,7 +2,7 @@
 resource "aws_subnet" "public-subnet" {
     vpc_id = "${aws_vpc.vpc.id}"
     cidr_block = "${var.cidr_public}"
-    availability_zone = ""
+    availability_zone = "eu-west-2a"
 
     tags = {
         App = "takeon"
@@ -15,7 +15,7 @@ resource "aws_subnet" "public-subnet" {
 resource "aws_subnet" "public-subnet2" {
     vpc_id = "${aws_vpc.vpc.id}"
     cidr_block = "${var.cidr_public2}"
-    availability_zone = ""
+    availability_zone = "eu-west-2b"
 
     tags = {
         Name = "${var.environment_name}-public-subnet2"

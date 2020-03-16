@@ -13,7 +13,7 @@ resource "aws_vpc" "vpc" {
     tags = {
         Name = "${var.environment_name}-vpc"
         App = "takeon"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
     }
 }
 
