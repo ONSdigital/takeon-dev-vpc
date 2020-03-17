@@ -59,8 +59,6 @@ resource "aws_security_group" "node-securitygroup" {
         Name = "takeon-nodes"
         App = "takeon"
         "aws:cloudformation:stack-id" = "${aws_cloudformation_stack.node-stack.id}"
-        #"aws:cloudformation:stack-id" = "arn:aws:cloudformation:eu-west-2:${var.accountID}:stack/takeon-dev-sandbox-node-stack/0c614590-5dfa-11ea-b14c-021679f87d94"
-        #"aws:cloudformation:stack-name" = "takeon-dev-sandbox-node-stack"
         "aws:cloudformation:stack-name" = "${aws_cloudformation_stack.node-stack.name}"
         "aws:cloudformation:logical-id" = "NodeSecurityGroup"
         "kubernetes.io/cluster/${aws_eks_cluster.eks.name}" = "owned"

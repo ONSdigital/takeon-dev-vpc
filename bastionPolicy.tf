@@ -1,7 +1,3 @@
-# data "aws_iam_group" "AllowTakeonBastionAccess" {
-#     group_name = "AllowTakeonBastionAccess"
-# }
-
 resource "aws_iam_group" "AllowTakeonBastionAccess" {
      name = "AllowTakeonBastionAccess"
 }
@@ -9,7 +5,6 @@ resource "aws_iam_group" "AllowTakeonBastionAccess" {
 resource "aws_iam_policy" "BastionAccess" {
     name = "${var.environment_name}BastionAccess"
     description = "Allows users from Takeon group access to the Bastion"
-    # policy = "${data.aws_iam_policy_document.Bastion}"
     policy = <<EOF
 {
     "Version": "2012-10-17",
