@@ -103,7 +103,7 @@ resource "aws_cloudformation_stack" "node-stack" {
     VpcId = "${aws_vpc.vpc.id}"
     ClusterControlPlaneSecurityGroup = "${aws_security_group.private-securitygroup.id}"
     ClusterName = "${aws_eks_cluster.eks.name}"
-    KeyName = "dev-vpc-key"
+    KeyName = "takeon-dev-vpc-key"
     NodeAutoScalingGroupDesiredCapacity =	2
     NodeAutoScalingGroupMaxSize	= 5
     NodeAutoScalingGroupMinSize	= 0

@@ -64,7 +64,7 @@ resource "aws_security_group" "private-securitygroup" {
         protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
         prefix_list_ids = ["pl-7ca54015"]
-        descripton = "Allow access to s3 using prefix list id"
+        description = "Allow access to s3 using prefix list id"
     }
 
 

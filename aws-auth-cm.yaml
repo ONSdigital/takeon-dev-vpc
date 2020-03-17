@@ -5,12 +5,12 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::${var.accountID}:role/node-stack-NodeInstanceRole-1GCJ8ETD6WEDK
+    - rolearn: arn:aws:iam::226575302242:role/takeon-dev-sandbox-node-stack-NodeInstanceRole-V9L4OF9XSDV9
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
-    - rolearn: arn:aws:iam::${var.accountID}:role/takeon-eks-role
+    - rolearn: arn:aws:iam::226575302242:role/takeon-eks-role
       username: admin:{{SessionName}}
       groups:
         - system:masters

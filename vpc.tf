@@ -7,11 +7,13 @@ provider "aws" {
 # Defining the VPC to be used
 resource "aws_vpc" "vpc" {
     cidr_block = "10.0.0.0/16"
+    # Added
+    enable_dns_hostnames = true
 
     tags = {
         Name = "${var.environment_name}-vpc"
         App = "takeon"
-        "kubernetes.io/cluster/eks-cluster" = "shared"
+        "kubernetes.io/cluster/takeon-dev-sandbox-eks-cluster" = "shared"
     }
 }
 
